@@ -1,0 +1,11 @@
+[Unit]
+Description=ipBot sends you current ip to a slack channel
+
+[Service]
+PIDFile=/tmp/ipBot.pid
+User=root
+Group=root
+ExecStart=YOUR_PATH_TO_GO_BINARY_HERE/ipBot YOUR_SLACK_TOKEN_HERE
+
+[Install]
+WantedBy=multi-user.target
