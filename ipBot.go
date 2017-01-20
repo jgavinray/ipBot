@@ -13,7 +13,6 @@ func checkIpAddressChange(c chan<- string) {
 	var ip string
 
 	for {
-		time.Sleep(1 * time.Minute)
 		resp, err := http.Get("https://ifconfig.co")
 
 		if err != nil {
@@ -37,13 +36,15 @@ func checkIpAddressChange(c chan<- string) {
 			ip = result
 			c <- result
         }
+        time.Sleep(1 * time.Minute)
 
 	}
 }
 
 func slackIpAddressChange(c chan string) {
 	
-	ws, _ := slackConnect(os.Args[1])
+	// ws, _ := slackConnect(os.Args[1])
+	ws, _ := slackConnect("xoxb-109879420662-lyrIyOq8nsnnBcmaL8IWqOrd")
 	h, _ := os.Hostname()
 	for {
 		msg := <-c
@@ -56,10 +57,10 @@ func slackIpAddressChange(c chan string) {
 }
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "usage: ipBot slack-bot-token\n")
-		os.Exit(1)
-	}
+	// if len(os.Args) != 2 {
+	// 	fmt.Fprintf(os.Stderr, "usage: ipBot slack-bot-token\n")
+	// 	os.Exit(1)
+	// }
 
 	fmt.Println("Starting up...")
 	

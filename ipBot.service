@@ -5,6 +5,8 @@ Description=ipBot sends you current ip to a slack channel
 PIDFile=/tmp/ipBot.pid
 User=root
 Group=root
+Restart=always
+RestartSec=30
 ExecStart=YOUR_PATH_TO_GO_BINARY_HERE/ipBot YOUR_SLACK_TOKEN_HERE
 
 [Install]
